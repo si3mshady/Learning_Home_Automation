@@ -6,8 +6,8 @@ before_install:
   - docker build -t  si3mshady/alexa-api:v1 .
 
 script:
-  - docker run si3mshady/alexa-api:v1 cat app | wc -l > testing.txt
-  - docker run si3mshady/alexa-api:v1 cat testing.txt | grep 151
+  - docker run si3mshady/alexa-api:v1 cat app.py | wc -l | grep 151
+
 
 deploy:
   provider: elasticbeanstalk
