@@ -1,0 +1,25 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t  si3mshady/alexa-api:v1 .
+
+script:
+  - docker run si3mshady/alexa-api:v1 cat app | wc -l > testing.txt
+  - docker run si3mshady/alexa-api:v1 cat testing.txt | grep 151
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "si3mshady-alexa-home-automation"
+  env: "Si3mshadyAlexaHomeAutomation-env "
+  bucket_name: "elasticbeanstalk-us-east-1-952151691101"
+  bucket_path: "si3mshady-alexa-home-automation"
+  on:
+    branch: master
+
+  access_key_id:
+    secure: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
