@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t  si3mshady/alexa-api:v1 .
+  - docker build -t  si3mshady/alexa-api:v2 .
 
 script:
   - docker run si3mshady/alexa-api:v1 cat app.py | wc -l | grep 151
